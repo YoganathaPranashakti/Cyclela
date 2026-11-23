@@ -1,17 +1,17 @@
 <p align="center">
-  <img src="assets/icons/cyclela-icon.svg" width="88" height="88" alt="Logo Cyclela" />
+  <img src="assets/icons/cyclela-icon.svg" width="88" height="88" alt="Cyclela logo" />
 </p>
 
 <h1 align="center">Cyclela</h1>
 
 <p align="center">
-  Ruang pribadi untuk mengenali dan mencatat siklus tubuhmu.
+  A private space to understand and track your body's cycle.
 </p>
 
 <p align="center">
-  <a href="README.md"><strong>Bahasa Indonesia</strong></a> ·
-  <a href="README.en.md">English</a> ·
-  <a href="https://cyclela.vercel.app/">Demo Live</a>
+  <a href="README.id.md">Bahasa Indonesia</a> ·
+  <a href="README.md"><strong>English</strong></a> ·
+  <a href="https://cyclela.vercel.app/">Live Demo</a>
 </p>
 
 <p align="center">
@@ -21,102 +21,102 @@
   <img src="https://img.shields.io/badge/license-Personal-d783a6" alt="Personal project" />
 </p>
 
-![Dashboard Cyclela](assets/screenshots/home.jpg)
+![Cyclela dashboard](assets/screenshots/home.jpg)
 
-## Daftar Isi
+## Table of Contents
 
-- [Tentang](#tentang)
+- [About](#about)
 - [Demo](#demo)
-- [Fitur Utama](#fitur-utama)
-- [Tangkapan Layar](#tangkapan-layar)
-- [Teknologi](#teknologi)
-- [Struktur Project](#struktur-project)
-- [Menjalankan Lokal](#menjalankan-lokal)
+- [Key Features](#key-features)
+- [Screenshots](#screenshots)
+- [Tech Stack](#tech-stack)
+- [Project Structure](#project-structure)
+- [Run Locally](#run-locally)
 - [PWA & Offline](#pwa--offline)
-- [Bahasa (i18n)](#bahasa-i18n)
-- [Privasi & Penyimpanan Data](#privasi--penyimpanan-data)
-- [Lisensi](#lisensi)
+- [Language (i18n)](#language-i18n)
+- [Privacy & Data Storage](#privacy--data-storage)
+- [License](#license)
 
-## Tentang
+## About
 
-**Cyclela** ("Cycle Angela") adalah aplikasi web progresif (PWA) pribadi untuk melacak siklus menstruasi dan mencatat kesehatan harian. Dirancang mobile-first dengan nuansa hangat, berjalan sepenuhnya di browser — data disimpan di `localStorage`, tanpa backend atau server.
+**Cyclela** ("Cycle Angela") is a personal progressive web app (PWA) for tracking the menstrual cycle and logging daily health. Designed mobile-first with a warm tone, it runs entirely in the browser — data is stored in `localStorage`, with no backend or server.
 
 ## Demo
 
-Coba langsung di browser: **https://cyclela.vercel.app/**
+Try it in your browser: **https://cyclela.vercel.app/**
 
-## Fitur Utama
+## Key Features
 
-- **Dashboard (Ringkasan)** — hari siklus saat ini, perkiraan haid berikutnya, fase siklus (Menstruasi, Folikuler, Ovulasi, Luteal), dan indikator visual proporsi fase.
-- **Kalender Siklus** — tandai hari-hari haid, prediksi haid & ovulasi berikutnya, navigasi bulan/tahun, legenda warna.
-- **Jurnal Harian** — catat mood (multi-pilihan), tingkat kram (1–5), gejala tubuh (18+ pilihan), dan catatan pribadi per tanggal.
-- **Pengaturan** — nama panggilan profil, panjang siklus (15–60 hari atau otomatis dari pola catatan), efek suara, musik latar, volume, dan bahasa antarmuka.
-- **Audio** — efek suara & musik latar dibuat langsung di perangkat via Web Audio API.
-- **Dukungan Fase** — penjelasan singkat untuk setiap fase siklus.
-- **PWA** — service worker + manifest, bisa di-install dan bekerja offline.
+- **Dashboard (Overview)** — current cycle day, next period estimate, cycle phase (Menstruation, Follicular, Ovulation, Luteal), and a visual phase proportion indicator.
+- **Cycle Calendar** — mark period days, forecast next period & ovulation, navigate months/years, color legend.
+- **Daily Journal** — log mood (multi-select), cramp level (1–5), body symptoms (18+ options), and a personal note per date.
+- **Settings** — profile nickname, cycle length (15–60 days or automatic from recorded pattern), sound effects, background music, volume, and interface language.
+- **Audio** — sound effects & background music generated on-device via the Web Audio API.
+- **Phase Guide** — short explanations for each cycle phase.
+- **PWA** — service worker + manifest; installable and works offline.
 
-## Tangkapan Layar
+## Screenshots
 
-| Ringkasan | Kalender |
+| Overview | Calendar |
 | --- | --- |
-| ![Ringkasan](assets/screenshots/home.jpg) | ![Kalender](assets/screenshots/calendar.jpg) |
+| ![Overview](assets/screenshots/home.jpg) | ![Calendar](assets/screenshots/calendar.jpg) |
 
-| Jurnal Harian | Pengaturan |
+| Daily Journal | Settings |
 | --- | --- |
-| ![Jurnal](assets/screenshots/journal.jpg) | ![Pengaturan](assets/screenshots/settings.jpg) |
+| ![Journal](assets/screenshots/journal.jpg) | ![Settings](assets/screenshots/settings.jpg) |
 
-## Teknologi
+## Tech Stack
 
-- **HTML5** — struktur & aksesibilitas
-- **CSS** — Tailwind CSS (via CDN) + CSS kustom (variabel, responsive, animasi)
-- **JavaScript (ES6, IIFE)** — logika aplikasi tanpa framework
-- **Web Audio API** — efek suara & musik latar (dibuat di perangkat)
-- **Service Worker** — cache aset & dukungan offline
-- **Web App Manifest** — instalasi sebagai PWA
-- **localStorage** — penyimpanan data di perangkat (tanpa backend)
+- **HTML5** — structure & accessibility
+- **CSS** — Tailwind CSS (via CDN) + custom CSS (variables, responsive, animations)
+- **JavaScript (ES6, IIFE)** — application logic, no framework
+- **Web Audio API** — sound effects & background music (generated on-device)
+- **Service Worker** — asset caching & offline support
+- **Web App Manifest** — installation as a PWA
+- **localStorage** — on-device data storage (no backend)
 
-Tidak ada build step, tidak ada dependensi npm, tidak ada backend.
+No build step, no npm dependencies, no backend.
 
-## Struktur Project
+## Project Structure
 
 ```
 Cyclela/
 ├── index.html              # Markup & styling
-├── app.js                  # Logika aplikasi (dashboard, kalender, jurnal, pengaturan, audio, i18n)
+├── app.js                  # App logic (dashboard, calendar, journal, settings, audio, i18n)
 ├── sw.js                   # Service worker (offline cache)
 ├── manifest.json           # PWA manifest
-├── README.md               # Dokumentasi (Bahasa Indonesia)
-├── README.en.md            # Documentation (English)
+├── README.md               # Documentation (English)
+├── README.id.md            # Documentation (Bahasa Indonesia)
 ├── .gitignore
 └── assets/
-    ├── icons/              # Ikon aplikasi (svg, png)
-    └── screenshots/        # Tangkapan layar untuk dokumentasi
+    ├── icons/              # App icons (svg, png)
+    └── screenshots/        # Screenshots for documentation
 ```
 
-## Menjalankan Lokal
+## Run Locally
 
-Cukup buka `index.html` di browser, atau serve dengan server statis:
+Just open `index.html` in your browser, or serve with a static server:
 
 ```bash
 npx serve .
-# atau
+# or
 npx http-server .
 ```
 
-Lalu buka `http://localhost:3000` (atau port yang ditampilkan).
+Then open `http://localhost:3000` (or the port shown).
 
 ## PWA & Offline
 
-Aplikasi mendaftarkan service worker (`sw.js`) yang menyimpan aset statis di cache. Setelah kunjungan pertama, Cyclela dapat dibuka tanpa koneksi internet. Manifest (`manifest.json`) memungkinkan instalasi ke layar utama (Add to Home Screen).
+The app registers a service worker (`sw.js`) that caches static assets. After the first visit, Cyclela can be opened without an internet connection. The manifest (`manifest.json`) enables installation to the home screen (Add to Home Screen).
 
-## Bahasa (i18n)
+## Language (i18n)
 
-Antarmuka mendukung **Bahasa Indonesia** dan **English**. Pilihan disimpan di perangkat (localStorage) dan dapat diubah di **Pengaturan → Bahasa / Language**. Default: Bahasa Indonesia.
+The interface supports **Bahasa Indonesia** and **English**. The choice is saved on the device (localStorage) and can be changed under **Settings → Language**. Default: Bahasa Indonesia.
 
-## Privasi & Penyimpanan Data
+## Privacy & Data Storage
 
-Semua data (catatan harian, hari haid, pengaturan profil, preferensi audio/bahasa) disimpan lokal di perangkat pengguna melalui `localStorage`. Tidak ada data yang dikirim ke server mana pun.
+All data (daily notes, period days, profile settings, audio/language preferences) is stored locally on the user's device via `localStorage`. No data is sent to any server.
 
-## Lisensi
+## License
 
-Proyek personal. © Yoganatha Pranashakti.
+Personal project. © Yoganatha Pranashakti.

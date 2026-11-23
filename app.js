@@ -64,7 +64,7 @@
       "cramp.label": "Tingkat kram (1 ringan – 5 berat)", "cramp.light": "Ringan", "cramp.heavy": "Berat",
       "journal.guide.title": "Isi jurnal dengan mudah", "journal.guide.1": "Pilih tanggal yang ingin dicatat. Hari ini sudah dipilih otomatis.",
       "journal.guide.2": "Pilih semua mood dan gejala yang kamu rasakan. Tingkat kram dan catatan pribadi boleh dilewati.",
-      "journal.guide.3": "Klik Simpan Catatan untuk menyimpan catatan.",
+      "journal.guide.3": "Klik <b>Simpan Catatan</b> untuk menyimpan catatan.",
       "journal.date.1": "1. Tanggal Jurnal", "journal.mood.2": "2. Mood Hari Ini", "journal.mood.help": "Pilih semua mood yang kamu rasakan; kamu bisa memilih lebih dari satu. Bagian ini boleh dilewati.",
       "journal.body.3": "3. Kondisi Tubuh", "journal.body.help": "Pilih gejala yang dirasakan; kamu bisa memilih lebih dari satu. Jika tidak ada, lewati bagian ini.",
       "journal.symptoms": "Gejala", "journal.note.4": "4. Cerita Pribadi", "journal.note.help": "Bagian ini opsional. Tulis hal yang ingin kamu ingat untuk tanggal tersebut.",
@@ -137,7 +137,7 @@
       "cramp.label": "Cramp level (1 mild – 5 severe)", "cramp.light": "Mild", "cramp.heavy": "Severe",
       "journal.guide.title": "Fill in the journal easily", "journal.guide.1": "Pick the date to record. Today is selected automatically.",
       "journal.guide.2": "Choose all moods and symptoms you feel. Cramp level and personal note are optional.",
-      "journal.guide.3": "Click Save Entry to save the note.",
+      "journal.guide.3": "Click <b>Save Entry</b> to save the note.",
       "journal.date.1": "1. Journal Date", "journal.mood.2": "2. Today's Mood", "journal.mood.help": "Choose all moods you feel; you can pick more than one. This section is optional.",
       "journal.body.3": "3. Body Condition", "journal.body.help": "Choose the symptoms you feel; you can pick more than one. If none, skip this section.",
       "journal.symptoms": "Symptoms", "journal.note.4": "4. Personal Story", "journal.note.help": "This section is optional. Write anything you want to remember for that date.",
@@ -191,7 +191,9 @@
     document.querySelectorAll("[data-i18n]").forEach((el) => {
       const key = el.getAttribute("data-i18n");
       const val = t(key);
-      if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
+      if (el.hasAttribute("data-i18n-html")) {
+        el.innerHTML = val;
+      } else if (el.tagName === "INPUT" || el.tagName === "TEXTAREA") {
         if (el.hasAttribute("placeholder")) el.setAttribute("placeholder", val);
       } else {
         el.textContent = val;
@@ -416,7 +418,7 @@ let currentLanguage = loadLanguage();
 
 function loadLanguage() {
     const saved = localStorage.getItem(STORAGE_KEYS.language);
-    return saved === "en" ? "en" : "id";
+    return saved === "id" ? "id" : "en";
   }
 
   function loadAudioSettings() {

@@ -9,8 +9,8 @@
 </p>
 
 <p align="center">
-  <a href="README.md">Bahasa Indonesia</a> ·
-  <a href="README.en.md"><strong>English</strong></a> ·
+  <a href="README.id.md">Bahasa Indonesia</a> ·
+  <a href="README.md"><strong>English</strong></a> ·
   <a href="https://cyclela.vercel.app/">Live Demo</a>
 </p>
 
@@ -85,8 +85,8 @@ Cyclela/
 ├── app.js                  # App logic (dashboard, calendar, journal, settings, audio, i18n)
 ├── sw.js                   # Service worker (offline cache)
 ├── manifest.json           # PWA manifest
-├── README.md               # Documentation (Bahasa Indonesia)
-├── README.en.md            # Documentation (English)
+├── README.md               # Documentation (English)
+├── README.id.md            # Documentation (Bahasa Indonesia)
 ├── .gitignore
 └── assets/
     ├── icons/              # App icons (svg, png)
