@@ -22,7 +22,7 @@
       "journal.eyebrow": "Jurnal harian", "journal.title": "Catatan Harianmu",
       "settings.eyebrow": "Sesuaikan pengalamanmu", "settings.title": "Pengaturan Cyclela", "settings.subtitle": "Atur tampilan nama, siklus, dan suara sesuai kebutuhan.",
       "settings.profileTitle": "Profil dan Siklus", "settings.audioTitle": "Audio", "settings.languageTitle": "Bahasa / Language",
-      "settings.nickname": "Nama Panggilan", "settings.saveName": "Simpan Nama",
+      "settings.nickname": "Nama Panggilan", "settings.nicknamePlaceholder": "Contoh: BAU", "settings.saveName": "Simpan Nama",
       "settings.cycleLength": "Panjang Siklus", "settings.saveCycle": "Simpan Panjang Siklus", "settings.useAuto": "Gunakan Pola Otomatis",
       "settings.cycleNote": "Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.",
       "settings.soundEffects": "Efek Suara", "settings.backgroundMusic": "Musik Latar", "settings.effectsVolume": "Volume Efek Suara", "settings.musicVolume": "Volume Musik Latar",
@@ -43,7 +43,7 @@
       "toast.nameRequired": "Isi nama panggilan terlebih dahulu.", "toast.nameSaved": "Nama panggilan berhasil disimpan.",
       "toast.nameFailed": "Nama panggilan gagal disimpan di perangkat.", "toast.cycleRange": "Panjang siklus harus antara 15 dan 60 hari.",
       "toast.cycleSaved": "Siklus {n} hari berhasil disimpan. Prediksi dan fase sudah diperbarui.", "toast.cycleAuto": "Cyclela kembali mengikuti pola kalender otomatis.",
-      "toast.cycleAutoFailed": "Pengaturan siklus otomatis gagal disimpan.", "toast.logDateInvalid": "Pilih tanggal catatan yang valid.",
+      "toast.cycleAutoFailed": "Pengaturan siklus otomatis gagal disimpan.", "toast.cycleFailed": "Panjang siklus gagal disimpan di perangkat.", "toast.logDateInvalid": "Pilih tanggal catatan yang valid.",
       "toast.logFuture": "Catatan tidak dapat dibuat untuk tanggal mendatang.", "toast.logSaveFailed": "Catatan gagal disimpan. Periksa ruang penyimpanan perangkat.",
       "toast.periodPastOnly": "Hari haid hanya bisa dicatat untuk hari ini atau sebelumnya.", "toast.periodSaveFailed": "Catatan hari haid gagal disimpan di perangkat.",
       "toast.audioToggleFailed": "Pilihan musik gagal disimpan.", "toast.soundToggleFailed": "Pilihan efek suara gagal disimpan.",
@@ -80,9 +80,11 @@
       "profile.cycleLengthSetting": "Panjang Siklus", "profile.cycleLengthUnit": "hari", "profile.saveCycle": "Simpan Panjang Siklus",
       "profile.cycleNote": "Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.",
       "audio.effects": "Efek Suara", "audio.music": "Musik Latar", "audio.effectsVolume": "Volume Efek Suara", "audio.musicVolume": "Volume Musik Latar",
+      "audio.aria.effects": "Efek suara", "audio.aria.music": "Musik latar",
       "audio.status.active": "Suara aktif saat halaman dibuka.", "audio.status.trying": "Mencoba memulai musik latar otomatis…",
       "audio.status.off": "Musik latar dimatikan.", "audio.status.paused": "Musik dijeda saat Cyclela tidak terbuka.",
       "audio.status.touch": "Sentuh layar sekali agar browser mengizinkan musik.", "audio.status.playing": "Musik latar sedang diputar.",
+      "audio.status.starting": "Mengaktifkan musik latar…", "audio.status.blocked": "Browser belum mengizinkan musik diputar.",
       "audio.note": "Musik dibuat langsung di perangkat. Jika browser memblokir putar otomatis, sentuh layar sekali untuk memulainya.",
       "privacy.note": "Semua data disimpan lokal di perangkat.",
     },
@@ -95,7 +97,7 @@
       "journal.eyebrow": "Daily journal", "journal.title": "Your Daily Notes",
       "settings.eyebrow": "Customize your experience", "settings.title": "Cyclela Settings", "settings.subtitle": "Adjust your name, cycle, and sound to your needs.",
       "settings.profileTitle": "Profile & Cycle", "settings.audioTitle": "Audio", "settings.languageTitle": "Language",
-      "settings.nickname": "Nickname", "settings.saveName": "Save Name",
+      "settings.nickname": "Nickname", "settings.nicknamePlaceholder": "e.g. BAU", "settings.saveName": "Save Name",
       "settings.cycleLength": "Cycle Length", "settings.saveCycle": "Save Cycle Length", "settings.useAuto": "Use Automatic Pattern",
       "settings.cycleNote": "Choose your average cycle length (15–60 days). This value drives the dashboard, phases, and predictions. Press “Use Automatic Pattern” to follow your calendar notes again.",
       "settings.soundEffects": "Sound Effects", "settings.backgroundMusic": "Background Music", "settings.effectsVolume": "Sound Effects Volume", "settings.musicVolume": "Background Music Volume",
@@ -116,7 +118,7 @@
       "toast.nameRequired": "Enter a nickname first.", "toast.nameSaved": "Nickname saved successfully.",
       "toast.nameFailed": "Nickname failed to save on this device.", "toast.cycleRange": "Cycle length must be between 15 and 60 days.",
       "toast.cycleSaved": "Cycle of {n} days saved. Predictions and phases updated.", "toast.cycleAuto": "Cyclela is following your calendar pattern again.",
-      "toast.cycleAutoFailed": "Automatic cycle settings failed to save.", "toast.logDateInvalid": "Choose a valid entry date.",
+      "toast.cycleAutoFailed": "Automatic cycle settings failed to save.", "toast.cycleFailed": "Cycle length failed to save on this device.", "toast.logDateInvalid": "Choose a valid entry date.",
       "toast.logFuture": "Entries cannot be created for future dates.", "toast.logSaveFailed": "Entry failed to save. Check device storage.",
       "toast.periodPastOnly": "Period days can only be recorded for today or earlier.", "toast.periodSaveFailed": "Period day failed to save on this device.",
       "toast.audioToggleFailed": "Music choice failed to save.", "toast.soundToggleFailed": "Sound effect choice failed to save.",
@@ -153,9 +155,11 @@
       "profile.cycleLengthSetting": "Cycle Length", "profile.cycleLengthUnit": "days", "profile.saveCycle": "Save Cycle Length",
       "profile.cycleNote": "Choose your average cycle length (15–60 days). This value drives the dashboard, phases, and predictions. Press “Use Automatic Pattern” to follow your calendar notes again.",
       "audio.effects": "Sound Effects", "audio.music": "Background Music", "audio.effectsVolume": "Sound Effects Volume", "audio.musicVolume": "Background Music Volume",
+      "audio.aria.effects": "Sound effects", "audio.aria.music": "Background music",
       "audio.status.active": "Sound active when page is open.", "audio.status.trying": "Trying to start background music automatically…",
       "audio.status.off": "Background music turned off.", "audio.status.paused": "Music paused while Cyclela is not open.",
       "audio.status.touch": "Tap the screen once to allow the browser to play music.", "audio.status.playing": "Background music is playing.",
+      "audio.status.starting": "Starting background music…", "audio.status.blocked": "The browser hasn't allowed music to play yet.",
       "audio.note": "Music is generated directly on the device. If the browser blocks autoplay, tap the screen once to start it.",
       "privacy.note": "All data is stored locally on the device.",
     }
@@ -230,8 +234,10 @@
     if (muteds[1]) muteds[1].textContent = t("cramp.heavy");
     const crampLabel = document.querySelector('label[for="cramp-level"].field-label');
     if (crampLabel) crampLabel.textContent = t("cramp.label");
-// language toggle buttons
     updateLanguageControls();
+    document.documentElement.lang = currentLanguage;
+    updateAudioControls();
+    setAudioStatus(audioStatusKey);
   }
 
 const moodButtons = [...document.querySelectorAll(".mood-choice")];
@@ -453,15 +459,22 @@ function updateLanguageControls() {
     }
   }
 
+  let audioStatusKey = "audio.status.trying";
+
+  function setAudioStatus(key) {
+    audioStatusKey = key;
+    document.getElementById("audio-status").textContent = t(key);
+  }
+
   function updateAudioControls() {
     soundEffectsToggle.setAttribute("aria-pressed", String(soundEffectsEnabled));
     document.getElementById("sound-effects-state").textContent = soundEffectsEnabled ? t("settings.on") : t("settings.off");
-    soundEffectsToggle.setAttribute("aria-label", `Efek suara ${soundEffectsEnabled ? "aktif" : "mati"}`);
+    soundEffectsToggle.setAttribute("aria-label", `${t("audio.aria.effects")} ${soundEffectsEnabled ? t("settings.on") : t("settings.off")}`);
     backgroundMusicToggle.setAttribute("aria-pressed", String(backgroundMusicEnabled));
     document.getElementById("background-music-state").textContent = backgroundMusicEnabled
       ? audioContext && audioContext.state === "running" ? t("settings.on") : t("settings.waiting")
       : t("settings.off");
-    backgroundMusicToggle.setAttribute("aria-label", `Musik latar ${backgroundMusicEnabled ? "aktif" : "mati"}`);
+    backgroundMusicToggle.setAttribute("aria-label", `${t("audio.aria.music")} ${backgroundMusicEnabled ? t("settings.on") : t("settings.off")}`);
     document.getElementById("effects-volume").value = String(audioSettings.effects);
     document.getElementById("effects-volume-value").textContent = `${audioSettings.effects}%`;
     document.getElementById("music-volume").value = String(audioSettings.music);
@@ -549,7 +562,7 @@ function updateLanguageControls() {
 
   function startMusicPlayback() {
     if (!backgroundMusicEnabled || musicInterval || !audioContext || audioContext.state !== "running") return;
-    document.getElementById("audio-status").textContent = t("audio.status.playing");
+    setAudioStatus("audio.status.playing");
     updateAudioControls();
     playMusicNote();
     musicInterval = window.setInterval(playMusicNote, 1100);
@@ -564,7 +577,7 @@ function updateLanguageControls() {
       });
     }
     if (backgroundMusicEnabled) {
-      document.getElementById("audio-status").textContent = t("audio.status.paused");
+      setAudioStatus("audio.status.paused");
       updateAudioControls();
     }
   }
@@ -580,7 +593,7 @@ function updateLanguageControls() {
     try {
       await context.resume();
       if (context.state !== "running") {
-        document.getElementById("audio-status").textContent = t("audio.status.touch");
+        setAudioStatus("audio.status.touch");
         updateAudioControls();
         return;
       }
@@ -593,7 +606,7 @@ function updateLanguageControls() {
       } else if (error.name !== "NotAllowedError") {
         console.error("Musik otomatis Cyclela gagal dimulai.", error);
       }
-      document.getElementById("audio-status").textContent = t("audio.status.touch");
+      setAudioStatus("audio.status.touch");
     }
   }
 
@@ -602,7 +615,7 @@ function updateLanguageControls() {
     window.clearInterval(musicInterval);
     musicInterval = null;
     updateAudioControls();
-    document.getElementById("audio-status").textContent = t("audio.status.off");
+    setAudioStatus("audio.status.off");
     try {
       localStorage.setItem(STORAGE_KEYS.backgroundMusic, "off");
     } catch (error) {
@@ -637,7 +650,7 @@ function updateLanguageControls() {
         console.error("Pilihan musik Cyclela tidak dapat disimpan.", error);
         showToast(t("toast.audioToggleFailed"));
       }
-      document.getElementById("audio-status").textContent = "Mengaktifkan musik latar…";
+      setAudioStatus("audio.status.starting");
       startBackgroundMusic();
     }
   });
@@ -674,7 +687,7 @@ function updateLanguageControls() {
     if (!backgroundMusicEnabled || !audioContext || audioContext.state === "running") return;
     audioContext.resume().then(startMusicPlayback).catch((error) => {
       console.error("Musik Cyclela gagal aktif setelah sentuhan.", error);
-      document.getElementById("audio-status").textContent = "Browser belum mengizinkan musik diputar.";
+      setAudioStatus("audio.status.blocked");
     });
   }, { once: true });
 
@@ -697,9 +710,7 @@ function updateLanguageControls() {
   });
 
   updateAudioControls();
-  document.getElementById("audio-status").textContent = backgroundMusicEnabled
-    ? t("audio.status.trying")
-    : t("audio.status.off");
+  setAudioStatus(backgroundMusicEnabled ? "audio.status.trying" : "audio.status.off");
   if (backgroundMusicEnabled) startBackgroundMusic({ automatic: true });
 
   const phaseDescriptions = {};
@@ -986,7 +997,7 @@ function updateLanguageControls() {
   });
 
   document.getElementById("cycle-length-setting").addEventListener("input", (event) => {
-    document.getElementById("cycle-length-setting-value").textContent = `${event.currentTarget.value} hari`;
+    document.getElementById("cycle-length-setting-value").textContent = `${event.currentTarget.value} ${t("profile.cycleLengthUnit")}`;
   });
 
   document.getElementById("cycle-settings-form").addEventListener("submit", (event) => {
@@ -1006,7 +1017,7 @@ function updateLanguageControls() {
       showActionDialog(t("toast.cycleSaved", { n: cycleLength }));
     } catch (error) {
       console.error("Panjang siklus Cyclela tidak dapat disimpan.", error);
-      showToast("Panjang siklus gagal disimpan di perangkat.");
+      showToast(t("toast.cycleFailed"));
     }
   });
 

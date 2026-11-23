@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="id">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -428,16 +428,16 @@
           <form id="profile-settings-form" class="settings-form">
             <label class="volume-control" for="profile-name">
               <span class="volume-heading" data-i18n="settings.nickname">Nama Panggilan</span>
-              <input id="profile-name" type="text" maxlength="24" autocomplete="nickname" placeholder="Contoh: BAU" />
+              <input id="profile-name" type="text" maxlength="24" autocomplete="nickname" placeholder="e.g. BAU" data-i18n-placeholder="settings.nicknamePlaceholder" />
             </label>
             <button class="primary-button" type="submit" data-i18n="settings.saveName">Simpan Nama</button>
           </form>
           <form id="cycle-settings-form" class="settings-form">
             <label class="volume-control" for="cycle-length-setting">
-              <span class="volume-heading">Panjang Siklus <output id="cycle-length-setting-value" for="cycle-length-setting">28 hari</output></span>
+              <span class="volume-heading"><span data-i18n="settings.cycleLength">Panjang Siklus</span> <output id="cycle-length-setting-value" for="cycle-length-setting">28 hari</output></span>
               <input id="cycle-length-setting" type="range" min="15" max="60" step="1" value="28" />
             </label>
-            <p class="privacy-note">Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.</p>
+            <p class="privacy-note" data-i18n="settings.cycleNote">Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.</p>
             <div class="settings-actions">
               <button class="primary-button" type="submit" data-i18n="settings.saveCycle">Simpan Panjang Siklus</button>
               <button class="secondary-button" id="use-automatic-cycle" type="button" data-i18n="settings.useAuto">Gunakan Pola Otomatis</button>
@@ -455,15 +455,15 @@
             </button>
           </div>
           <label class="volume-control" for="effects-volume">
-            <span class="volume-heading">Volume Efek Suara <output id="effects-volume-value" for="effects-volume">100%</output></span>
+            <span class="volume-heading"><span data-i18n="settings.effectsVolume">Volume Efek Suara</span> <output id="effects-volume-value" for="effects-volume">100%</output></span>
             <input id="effects-volume" type="range" min="0" max="100" step="1" value="100" />
           </label>
           <label class="volume-control" for="music-volume">
-            <span class="volume-heading">Volume Musik Latar <output id="music-volume-value" for="music-volume">100%</output></span>
+            <span class="volume-heading"><span data-i18n="settings.musicVolume">Volume Musik Latar</span> <output id="music-volume-value" for="music-volume">100%</output></span>
             <input id="music-volume" type="range" min="0" max="100" step="1" value="100" />
           </label>
           <p class="audio-status" id="audio-status" role="status" aria-live="polite">Suara aktif saat halaman dibuka.</p>
-          <p class="privacy-note">Musik dibuat langsung di perangkat. Jika browser memblokir putar otomatis, sentuh layar sekali untuk memulainya.</p>
+          <p class="privacy-note" data-i18n="audio.note">Musik dibuat langsung di perangkat. Jika browser memblokir putar otomatis, sentuh layar sekali untuk memulainya.</p>
           </section>
         </section>
       </section>
