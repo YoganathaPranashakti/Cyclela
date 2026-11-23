@@ -1,13 +1,13 @@
-const CACHE_NAME = "cyclela-static-v18";
+const CACHE_NAME = "cyclela-static-v19";
 const APP_SHELL = [
   "./",
   "./index.html",
   "./manifest.json",
   "./app.js",
-  "./cyclela-icon.svg",
-  "./cyclela-180.png",
-  "./cyclela-192.png",
-  "./cyclela-512.png"
+  "./assets/icons/cyclela-icon.svg",
+  "./assets/icons/cyclela-180.png",
+  "./assets/icons/cyclela-192.png",
+  "./assets/icons/cyclela-512.png"
 ];
 
 self.addEventListener("install", (event) => {

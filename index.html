@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#fff8f4" />
     <meta name="description" content="Cyclela, ruang pribadi untuk mengenali dan mencatat siklus tubuhmu." />
     <link rel="manifest" href="./manifest.json" />
-    <link rel="icon" href="./cyclela-icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="./cyclela-180.png" />
+    <link rel="icon" href="./assets/icons/cyclela-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./assets/icons/cyclela-180.png" />
     <title>Cyclela</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -221,26 +221,26 @@
             <p>Cycle Angela</p>
           </div>
         </div>
-        <div class="offline-pill"><span class="offline-dot"></span>Punya<span id="profile-name-badge">BAU</span></div>
+        <div class="offline-pill"><span class="offline-dot"></span><span data-i18n="offline.punya">Punya</span><span id="profile-name-badge">BAU</span></div>
       </header>
 
-      <button class="affirmation affirmation-trigger" id="daily-affirmation" type="button" aria-haspopup="dialog" aria-controls="affection-dialog"><span>Hai, <span id="profile-name-affirmation"></span></span> 🌷</button>
+      <button class="affirmation affirmation-trigger" id="daily-affirmation" type="button" aria-haspopup="dialog" aria-controls="affection-dialog"><span><span data-i18n="affirmation.hai">Hai,</span> <span id="profile-name-affirmation"></span></span> 🌷</button>
       <section class="view-panel" id="home-view" aria-labelledby="dashboard-title">
       <section class="card dashboard" aria-labelledby="dashboard-title">
         <div class="dashboard-top">
           <div>
-            <p class="eyebrow" id="today-label">Hari ini</p>
-            <h2 id="dashboard-title">Perjalanan Siklusmu</h2>
+            <p class="eyebrow" id="today-label" data-i18n="dashboard.todayLabel">Hari ini</p>
+            <h2 id="dashboard-title" data-i18n="dashboard.title">Perjalanan Siklusmu</h2>
           </div>
           <span class="phase-badge" id="phase-badge">Fase Folikuler</span>
         </div>
         <div class="dashboard-main">
           <div>
-            <p class="eyebrow">Hari siklus</p>
-            <div class="cycle-number"><strong id="cycle-day">—</strong><span>dari <span id="cycle-length">—</span> hari</span></div>
+            <p class="eyebrow" data-i18n="dashboard.cycleDay">Hari siklus</p>
+            <div class="cycle-number"><strong id="cycle-day">—</strong><span><span data-i18n="dashboard.ofDays">dari</span> <span id="cycle-length">—</span> <span data-i18n="dashboard.days">hari</span></span></div>
           </div>
           <div class="estimate">
-            <p>Perkiraan haid berikutnya</p>
+            <p data-i18n="dashboard.nextPeriod">Perkiraan haid berikutnya</p>
             <strong id="next-period">—</strong>
             <p id="days-until">Berdasarkan siklus rata-rata 28 hari</p>
           </div>
@@ -253,20 +253,20 @@
         </div>
         <div class="phase-legend" aria-label="Pilih fase untuk membaca penjelasan">
           <button class="phase-info-button" type="button" data-phase-info="menstruasi">
-            <span class="phase-info-title"><i class="legend-dot" style="background:#eaa3b7"></i>Menstruasi</span>
-            <span class="phase-info-link">Lihat penjelasan</span>
+            <span class="phase-info-title"><i class="legend-dot" style="background:#eaa3b7"></i><span data-i18n="dashboard.phase.menstruasi">Menstruasi</span></span>
+            <span class="phase-info-link" data-i18n="phase.link">Lihat penjelasan</span>
           </button>
           <button class="phase-info-button" type="button" data-phase-info="folikuler">
-            <span class="phase-info-title"><i class="legend-dot" style="background:#f2d5a7"></i>Folikuler</span>
-            <span class="phase-info-link">Lihat penjelasan</span>
+            <span class="phase-info-title"><i class="legend-dot" style="background:#f2d5a7"></i><span data-i18n="dashboard.phase.folikuler">Folikuler</span></span>
+            <span class="phase-info-link" data-i18n="phase.link">Lihat penjelasan</span>
           </button>
           <button class="phase-info-button" type="button" data-phase-info="ovulasi">
-            <span class="phase-info-title"><i class="legend-dot" style="background:#c5b0df"></i>Ovulasi</span>
-            <span class="phase-info-link">Lihat penjelasan</span>
+            <span class="phase-info-title"><i class="legend-dot" style="background:#c5b0df"></i><span data-i18n="dashboard.phase.ovulasi">Ovulasi</span></span>
+            <span class="phase-info-link" data-i18n="phase.link">Lihat penjelasan</span>
           </button>
           <button class="phase-info-button" type="button" data-phase-info="luteal">
-            <span class="phase-info-title"><i class="legend-dot" style="background:#a9c8b8"></i>Luteal</span>
-            <span class="phase-info-link">Lihat penjelasan</span>
+            <span class="phase-info-title"><i class="legend-dot" style="background:#a9c8b8"></i><span data-i18n="dashboard.phase.luteal">Luteal</span></span>
+            <span class="phase-info-link" data-i18n="phase.link">Lihat penjelasan</span>
           </button>
         </div>
         <p class="phase-help">Fase mengikuti catatan kalender BAU. Pilih salah satu tombol di atas untuk membaca penjelasannya.</p>
@@ -277,29 +277,29 @@
         <section class="card" aria-labelledby="calendar-title">
           <div class="calendar-heading section-heading">
             <div>
-              <p class="eyebrow">Lihat polamu</p>
-              <h2 id="calendar-title">Kalender Siklus</h2>
+              <p class="eyebrow" data-i18n="calendar.eyebrow">Lihat polamu</p>
+              <h2 id="calendar-title" data-i18n="calendar.title">Kalender Siklus</h2>
             </div>
             <div class="month-nav">
-              <button class="icon-button" id="previous-month" type="button" aria-label="Bulan sebelumnya">
+              <button class="icon-button" id="previous-month" type="button" aria-label="Bulan sebelumnya" data-i18n-aria="calendar.prev">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m12 4-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <button class="icon-button" id="next-month" type="button" aria-label="Bulan berikutnya">
+              <button class="icon-button" id="next-month" type="button" aria-label="Bulan berikutnya" data-i18n-aria="calendar.next">
                 <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 4 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </button>
-              <input class="month-picker" id="month-picker" type="month" aria-label="Pilih bulan dan tahun" />
-              <button class="today-button" id="current-month" type="button">Bulan ini</button>
+              <input class="month-picker" id="month-picker" type="month" aria-label="Pilih bulan dan tahun" data-i18n-aria="calendar.monthLabel" />
+              <button class="today-button" id="current-month" type="button" data-i18n="calendar.thisMonth">Bulan ini</button>
             </div>
           </div>
           <div class="calendar-week" aria-hidden="true">
             <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
           </div>
           <div class="calendar-grid" id="calendar-grid" aria-label="Kalender bulanan"></div>
-          <p class="calendar-instruction">Ketuk tanggal untuk menandai atau membatalkan hari haid.</p>
+          <p class="calendar-instruction" data-i18n="calendar.tapHint">Ketuk tanggal untuk menandai atau membatalkan hari haid.</p>
           <div class="calendar-key">
-            <span><i class="key-dot recorded"></i>Haid dicatat</span>
-            <span><i class="key-dot forecast"></i>Perkiraan haid</span>
-            <span><i class="key-dot ovulation"></i>Perkiraan ovulasi</span>
+            <span><i class="key-dot recorded"></i><span data-i18n="calendar.key.recorded">Haid dicatat</span></span>
+            <span><i class="key-dot forecast"></i><span data-i18n="calendar.key.forecast">Perkiraan haid</span></span>
+            <span><i class="key-dot ovulation"></i><span data-i18n="calendar.key.ovulation">Perkiraan ovulasi</span></span>
           </div>
         </section>
       </section>
@@ -308,28 +308,28 @@
         <section class="card" aria-labelledby="log-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Jurnal harian</p>
-              <h2 id="log-title">Catatan Harianmu</h2>
+              <p class="eyebrow" data-i18n="journal.eyebrow">Jurnal harian</p>
+              <h2 id="log-title" data-i18n="journal.title">Catatan Harianmu</h2>
             </div>
           </div>
           <aside class="journal-guide" aria-label="Cara mengisi jurnal">
-            <h3>Isi jurnal dengan mudah</h3>
+            <h3 data-i18n="journal.guide.title">Isi jurnal dengan mudah</h3>
             <ol>
-              <li><span>1</span>Pilih tanggal yang ingin dicatat. Hari ini sudah dipilih otomatis.</li>
-              <li><span>2</span>Pilih semua mood dan gejala yang kamu rasakan. Tingkat kram dan catatan pribadi boleh dilewati.</li>
-              <li><span>3</span>Klik <b>Simpan Catatan</b>untuk menyimpan catatan.</li>
+              <li><span>1</span><span data-i18n="journal.guide.1">Pilih tanggal yang ingin dicatat. Hari ini sudah dipilih otomatis.</span></li>
+              <li><span>2</span><span data-i18n="journal.guide.2">Pilih semua mood dan gejala yang kamu rasakan. Tingkat kram dan catatan pribadi boleh dilewati.</span></li>
+              <li><span>3</span><span data-i18n="journal.guide.3">Klik <b>Simpan Catatan</b>untuk menyimpan catatan.</span></li>
             </ol>
           </aside>
           <form id="log-form">
             <section class="journal-section" aria-labelledby="log-date-label">
-              <label for="log-date" class="journal-section-heading field-label" id="log-date-label">1. Tanggal Jurnal</label>
+              <label for="log-date" class="journal-section-heading field-label" id="log-date-label" data-i18n="journal.date.1">1. Tanggal Jurnal</label>
               <input id="log-date" type="date" required />
               <p class="journal-date-status" id="journal-date-status" role="status" aria-live="polite"></p>
             </section>
 
             <section class="journal-section" aria-labelledby="mood-label">
-              <h3 class="journal-section-heading" id="mood-label">2. Mood Hari Ini</h3>
-              <p class="journal-section-help">Pilih semua mood yang kamu rasakan; kamu bisa memilih lebih dari satu. Bagian ini boleh dilewati.</p>
+              <h3 class="journal-section-heading" id="mood-label" data-i18n="journal.mood.2">2. Mood Hari Ini</h3>
+              <p class="journal-section-help" data-i18n="journal.mood.help">Pilih semua mood yang kamu rasakan; kamu bisa memilih lebih dari satu. Bagian ini boleh dilewati.</p>
               <div class="mood-options" role="group" aria-labelledby="mood-label">
                 <button class="mood-choice" type="button" data-mood="bahagia" aria-pressed="false"><span class="emoji">😊</span>Bahagia</button>
                 <button class="mood-choice" type="button" data-mood="tenang" aria-pressed="false"><span class="emoji">😌</span>Tenang</button>
@@ -351,9 +351,9 @@
             </section>
 
             <section class="journal-section" aria-labelledby="body-notes-title">
-              <h3 class="journal-section-heading" id="body-notes-title">3. Kondisi Tubuh</h3>
-              <p class="journal-section-help">Pilih gejala yang dirasakan; kamu bisa memilih lebih dari satu. Jika tidak ada, lewati bagian ini.</p>
-              <label for="cramp-level" class="field-label">Tingkat kram (1 ringan – 5 berat)</label>
+              <h3 class="journal-section-heading" id="body-notes-title" data-i18n="journal.body.3">3. Kondisi Tubuh</h3>
+              <p class="journal-section-help" data-i18n="journal.body.help">Pilih gejala yang dirasakan; kamu bisa memilih lebih dari satu. Jika tidak ada, lewati bagian ini.</p>
+              <label for="cramp-level" class="field-label" data-i18n="cramp.label">Tingkat kram (1 ringan – 5 berat)</label>
               <div class="form-row">
                 <span class="muted" aria-hidden="true">Ringan</span>
                 <input id="cramp-level" type="range" min="1" max="5" value="1" />
@@ -362,7 +362,7 @@
               </div>
 
             <fieldset class="form-group" style="padding:0;border:0">
-              <legend class="field-label">Gejala</legend>
+              <legend class="field-label" data-i18n="journal.symptoms">Gejala</legend>
               <div class="symptoms">
                 <label class="symptom-option"><input type="checkbox" value="kembung" /><span>Kembung</span></label>
                 <label class="symptom-option"><input type="checkbox" value="sakit kepala" /><span>Sakit kepala</span></label>
@@ -387,14 +387,14 @@
             </section>
 
             <section class="journal-section" aria-labelledby="personal-note-title">
-              <h3 class="journal-section-heading" id="personal-note-title">4. Cerita Pribadi</h3>
-              <p class="journal-section-help">Bagian ini opsional. Tulis hal yang ingin kamu ingat untuk tanggal tersebut.</p>
-              <label for="personal-note" class="field-label">Catatan Pribadi</label>
-              <textarea id="personal-note" maxlength="1000" placeholder="Tulis apa pun yang ingin kamu ingat…"></textarea>
+              <h3 class="journal-section-heading" id="personal-note-title" data-i18n="journal.note.4">4. Cerita Pribadi</h3>
+              <p class="journal-section-help" data-i18n="journal.note.help">Bagian ini opsional. Tulis hal yang ingin kamu ingat untuk tanggal tersebut.</p>
+              <label for="personal-note" class="field-label" data-i18n="journal.note.label">Catatan Pribadi</label>
+              <textarea id="personal-note" maxlength="1000" placeholder="Tulis apa pun yang ingin kamu ingat…" data-i18n-placeholder="journal.note.placeholder"></textarea>
             </section>
             <div class="button-row">
-              <button class="primary-button" type="submit">Simpan Catatan</button>
-              <button class="secondary-button" id="clear-log" type="button">Batalkan Perubahan</button>
+              <button class="primary-button" type="submit" data-i18n="journal.save">Simpan Catatan</button>
+              <button class="secondary-button" id="clear-log" type="button" data-i18n="journal.cancel">Batalkan Perubahan</button>
             </div>
           </form>
         </section>
@@ -404,19 +404,32 @@
         <section class="card audio-card" aria-labelledby="settings-title">
           <div class="section-heading">
             <div>
-              <p class="eyebrow">Sesuaikan pengalamanmu</p>
-              <h2 id="settings-title">Pengaturan Cyclela</h2>
-              <p class="muted">Atur tampilan nama, siklus, dan suara sesuai kebutuhan.</p>
+              <p class="eyebrow" data-i18n="settings.eyebrow">Sesuaikan pengalamanmu</p>
+              <h2 id="settings-title" data-i18n="settings.title">Pengaturan Cyclela</h2>
+              <p class="muted" data-i18n="settings.subtitle">Atur tampilan nama, siklus, dan suara sesuai kebutuhan.</p>
             </div>
           </div>
+          <section class="settings-group" aria-labelledby="language-settings-title">
+          <h3 id="language-settings-title" data-i18n="settings.languageTitle">Bahasa / Language</h3>
+          <form id="language-settings-form" class="settings-form">
+            <label class="volume-control" for="language-setting">
+              <span class="volume-heading" data-i18n="settings.languageLabel">Bahasa Antarmuka</span>
+              <select id="language-setting" class="month-picker">
+                <option value="id">Bahasa Indonesia</option>
+                <option value="en">English</option>
+              </select>
+            </label>
+            <p class="privacy-note">Pilih bahasa untuk seluruh antarmuka Cyclela. Preferensi disimpan di perangkat.</p>
+          </form>
+          </section>
           <section class="settings-group" aria-labelledby="profile-settings-title">
-          <h3 id="profile-settings-title">Profil dan Siklus</h3>
+          <h3 id="profile-settings-title" data-i18n="settings.profileTitle">Profil dan Siklus</h3>
           <form id="profile-settings-form" class="settings-form">
             <label class="volume-control" for="profile-name">
-              <span class="volume-heading">Nama Panggilan</span>
+              <span class="volume-heading" data-i18n="settings.nickname">Nama Panggilan</span>
               <input id="profile-name" type="text" maxlength="24" autocomplete="nickname" placeholder="Contoh: BAU" />
             </label>
-            <button class="primary-button" type="submit">Simpan Nama</button>
+            <button class="primary-button" type="submit" data-i18n="settings.saveName">Simpan Nama</button>
           </form>
           <form id="cycle-settings-form" class="settings-form">
             <label class="volume-control" for="cycle-length-setting">
@@ -425,19 +438,19 @@
             </label>
             <p class="privacy-note">Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.</p>
             <div class="settings-actions">
-              <button class="primary-button" type="submit">Simpan Panjang Siklus</button>
-              <button class="secondary-button" id="use-automatic-cycle" type="button">Gunakan Pola Otomatis</button>
+              <button class="primary-button" type="submit" data-i18n="settings.saveCycle">Simpan Panjang Siklus</button>
+              <button class="secondary-button" id="use-automatic-cycle" type="button" data-i18n="settings.useAuto">Gunakan Pola Otomatis</button>
             </div>
           </form>
           </section>
           <section class="settings-group" aria-labelledby="audio-settings-title">
-          <h3 id="audio-settings-title">Audio</h3>
+          <h3 id="audio-settings-title" data-i18n="settings.audioTitle">Audio</h3>
           <div class="audio-controls">
             <button class="audio-toggle" id="sound-effects-toggle" type="button" data-audio-control="effects" aria-pressed="true">
-              <span>Efek Suara</span><strong id="sound-effects-state">Aktif</strong>
+              <span data-i18n="audio.effects">Efek Suara</span><strong id="sound-effects-state">Aktif</strong>
             </button>
             <button class="audio-toggle" id="background-music-toggle" type="button" data-audio-control="music" aria-pressed="true">
-              <span>Musik Latar</span><strong id="background-music-state">Aktif</strong>
+              <span data-i18n="audio.music">Musik Latar</span><strong id="background-music-state">Aktif</strong>
             </button>
           </div>
           <label class="volume-control" for="effects-volume">
@@ -458,42 +471,42 @@
     <nav class="bottom-nav" id="bottom-nav" aria-label="Navigasi utama">
       <button class="nav-tab" type="button" data-view="home" aria-current="page">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg>
-        <span>Ringkasan</span>
+        <span data-i18n="nav.home">Ringkasan</span>
       </button>
       <button class="nav-tab" type="button" data-view="calendar" aria-current="false">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
-        <span>Kalender</span>
+        <span data-i18n="nav.calendar">Kalender</span>
       </button>
       <button class="nav-tab" type="button" data-view="journal" aria-current="false">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/><path d="M8.7 12.2h2l1-2.3 1.5 4.2 1-1.9h1.2"/></svg>
-        <span>Jurnal</span>
+        <span data-i18n="nav.journal">Jurnal</span>
       </button>
       <button class="nav-tab" type="button" data-view="settings" aria-current="false">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.4.8l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.4-.8l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.6l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.4-.8l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.4.8l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.6Z" transform="translate(-1 -1)"/></svg>
-        <span>Pengaturan</span>
+        <span data-i18n="nav.settings">Pengaturan</span>
       </button>
     </nav>
     <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
     <dialog id="phase-dialog" class="phase-dialog" aria-labelledby="phase-dialog-title">
       <h2 id="phase-dialog-title"></h2>
       <p id="phase-dialog-description"></p>
-      <button id="close-phase-dialog" class="primary-button" type="button">Mengerti</button>
+      <button id="close-phase-dialog" class="primary-button" type="button" data-i18n="action.ok">Mengerti</button>
     </dialog>
     <dialog id="affection-dialog" class="phase-dialog" aria-labelledby="affection-dialog-title">
       <div class="flower-rain" id="flower-rain" aria-hidden="true"></div>
-      <h2 id="affection-dialog-title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
-      <p>Cayang Anak Bau 🐷 Hehehe</p>
-      <button id="close-affection-dialog" class="primary-button" type="button">OK</button>
+      <h2 id="affection-dialog-title" data-i18n="affection.title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
+      <p data-i18n="affection.body">Cayang Anak Bau 🐷 Hehehe</p>
+      <button id="close-affection-dialog" class="primary-button" type="button" data-i18n="affection.ok">OK</button>
     </dialog>
     <dialog id="sleepy-dialog" class="phase-dialog" aria-labelledby="sleepy-dialog-title">
-      <h2 id="sleepy-dialog-title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
-      <p>KAMUKAN MEMANG SELALU NGANTUK, ITUMAH BUKAN GEJALA, DASAR ANAK BAU 🐷</p>
-      <button id="close-sleepy-dialog" class="primary-button" type="button">OK</button>
+      <h2 id="sleepy-dialog-title" data-i18n="sleepy.title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
+      <p data-i18n="sleepy.body">KAMUKAN MEMANG SELALU NGANTUK, ITUMAH BUKAN GEJALA, DASAR ANAK BAU 🐷</p>
+      <button id="close-sleepy-dialog" class="primary-button" type="button" data-i18n="sleepy.ok">OK</button>
     </dialog>
     <dialog id="action-dialog" class="phase-dialog" aria-labelledby="action-dialog-title" aria-describedby="action-dialog-message">
-      <h2 id="action-dialog-title">✅ Berhasil</h2>
+      <h2 id="action-dialog-title" data-i18n="action.success">✅ Berhasil</h2>
       <p id="action-dialog-message"></p>
-      <button id="close-action-dialog" class="primary-button" type="button">OK</button>
+      <button id="close-action-dialog" class="primary-button" type="button" data-i18n="action.ok">OK</button>
     </dialog>
     <script src="./app.js" defer></script>
   </body>
