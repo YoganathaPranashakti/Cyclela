@@ -221,7 +221,7 @@
             <p>Cycle Angela</p>
           </div>
         </div>
-        <div class="offline-pill"><span class="offline-dot"></span><span data-i18n="offline.punya">Punya</span><span id="profile-name-badge">BAU</span></div>
+        <div class="offline-pill"><span class="offline-dot"></span><span id="profile-name-badge">BAU</span></div>
       </header>
 
       <button class="affirmation affirmation-trigger" id="daily-affirmation" type="button" aria-haspopup="dialog" aria-controls="affection-dialog"><span><span data-i18n="affirmation.hai">Hai,</span> <span id="profile-name-affirmation"></span></span> 🌷</button>
@@ -412,14 +412,15 @@
           <section class="settings-group" aria-labelledby="language-settings-title">
           <h3 id="language-settings-title" data-i18n="settings.languageTitle">Bahasa / Language</h3>
           <form id="language-settings-form" class="settings-form">
-            <label class="volume-control" for="language-setting">
-              <span class="volume-heading" data-i18n="settings.languageLabel">Bahasa Antarmuka</span>
-              <select id="language-setting" class="month-picker">
-                <option value="id">Bahasa Indonesia</option>
-                <option value="en">English</option>
-              </select>
-            </label>
-            <p class="privacy-note">Pilih bahasa untuk seluruh antarmuka Cyclela. Preferensi disimpan di perangkat.</p>
+            <div class="audio-controls">
+              <button class="audio-toggle" id="language-id" type="button" data-lang="id" aria-pressed="true">
+                <span>🇮🇩 Bahasa Indonesia</span><strong id="language-id-state">Aktif</strong>
+              </button>
+              <button class="audio-toggle" id="language-en" type="button" data-lang="en" aria-pressed="false">
+                <span>🇬🇧 English</span><strong id="language-en-state">Mati</strong>
+              </button>
+            </div>
+            <p class="privacy-note" data-i18n="settings.languageNote">Pilih bahasa untuk seluruh antarmuka Cyclela. Preferensi disimpan di perangkat.</p>
           </form>
           </section>
           <section class="settings-group" aria-labelledby="profile-settings-title">

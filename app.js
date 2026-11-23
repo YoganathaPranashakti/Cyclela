@@ -228,9 +228,8 @@
     if (muteds[1]) muteds[1].textContent = t("cramp.heavy");
     const crampLabel = document.querySelector('label[for="cramp-level"].field-label');
     if (crampLabel) crampLabel.textContent = t("cramp.label");
-    // language select
-    const langSelect = document.getElementById("language-setting");
-    if (langSelect) langSelect.value = currentLanguage;
+// language toggle buttons
+    updateLanguageControls();
   }
 
 const moodButtons = [...document.querySelectorAll(".mood-choice")];
@@ -433,6 +432,22 @@ function loadLanguage() {
       console.error("Pengaturan volume Cyclela tidak dapat dibaca.", error);
       showToast(t("toast.volumeUnreadable"));
       return { effects: 100, music: 100 };
+    }
+  }
+
+function updateLanguageControls() {
+    const idActive = currentLanguage === "id";
+    const idButton = document.getElementById("language-id");
+    const enButton = document.getElementById("language-en");
+    if (idButton) {
+      idButton.setAttribute("aria-pressed", String(idActive));
+      const state = document.getElementById("language-id-state");
+      if (state) state.textContent = idActive ? t("settings.on") : t("settings.off");
+    }
+    if (enButton) {
+      enButton.setAttribute("aria-pressed", String(!idActive));
+      const state = document.getElementById("language-en-state");
+      if (state) state.textContent = !idActive ? t("settings.on") : t("settings.off");
     }
   }
 
@@ -1008,18 +1023,21 @@ function loadLanguage() {
     }
   });
 
-document.getElementById("language-setting").addEventListener("change", (event) => {
-    const lang = event.currentTarget.value === "en" ? "en" : "id";
-    currentLanguage = lang;
-    try {
-      localStorage.setItem(STORAGE_KEYS.language, lang);
-    } catch (error) {
-      console.error("Bahasa Cyclela tidak dapat disimpan.", error);
-    }
-    applyTranslations();
-    renderProfileSettings();
-    renderDashboard();
-    renderCalendar();
+document.querySelectorAll("[data-lang]").forEach((button) => {
+    button.addEventListener("click", () => {
+      const lang = button.dataset.lang === "en" ? "en" : "id";
+      currentLanguage = lang;
+      try {
+        localStorage.setItem(STORAGE_KEYS.language, lang);
+      } catch (error) {
+        console.error("Bahasa Cyclela tidak dapat disimpan.", error);
+      }
+      updateLanguageControls();
+      applyTranslations();
+      renderProfileSettings();
+      renderDashboard();
+      renderCalendar();
+    });
   });
 
   document.getElementById("clear-log").addEventListener("click", () => {
