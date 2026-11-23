@@ -162,6 +162,9 @@
       .primary-button:hover { background: #b96687; }
       .secondary-button { border: 1px solid #eee7ec; background: #fff; color: #786b79; }
       .privacy-note { margin: 13px 0 0; color: #9b9099; font-size: .7rem; line-height: 1.5; }
+      .settings-footer { margin-top: 4px; padding-top: 14px; border-top: 1px solid #f1eaee; color: #9b9099; font-size: .7rem; line-height: 1.5; text-align: center; }
+      .settings-footer a { color: #a25373; font-weight: 650; text-decoration: none; }
+      .settings-footer a:hover { text-decoration: underline; }
       .bottom-nav { position: fixed; z-index: 10; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px max(16px, calc((100vw - 520px) / 2)) max(8px, env(safe-area-inset-bottom)); border-top: 1px solid #efe7eb; background: #fffdfc; box-shadow: 0 -8px 24px #5144540d; }
       .bottom-nav[hidden] { display: none; }
       .nav-tab { display: grid; justify-items: center; gap: 3px; min-height: 50px; padding: 5px 4px; border: 0; border-radius: 15px; color: #948592; background: transparent; font-size: .62rem; font-weight: 650; }
@@ -465,6 +468,11 @@
           <p class="audio-status" id="audio-status" role="status" aria-live="polite">Suara aktif saat halaman dibuka.</p>
           <p class="privacy-note" data-i18n="audio.note">Musik dibuat langsung di perangkat. Jika browser memblokir putar otomatis, sentuh layar sekali untuk memulainya.</p>
           </section>
+          <footer class="settings-footer">
+            © 2026 Cyclela · <span data-i18n="settings.creditBy">Dibuat oleh</span>
+            <a href="https://github.com/YoganathaPranashakti" target="_blank" rel="noopener noreferrer">Yoganatha Pranashakti</a>
+            · <a href="https://github.com/YoganathaPranashakti/Cyclela" target="_blank" rel="noopener noreferrer" data-i18n="settings.creditRepo">GitHub ↗</a>
+          </footer>
         </section>
       </section>
 
