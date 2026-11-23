@@ -61,9 +61,17 @@ Coba langsung di browser: **https://cyclela.vercel.app/**
 | --- | --- |
 | ![Ringkasan](assets/screenshots/home.jpg) | ![Kalender](assets/screenshots/calendar.jpg) |
 
-| Jurnal Harian | Pengaturan |
+| Jurnal Harian | Detail Jurnal |
 | --- | --- |
-| ![Jurnal](assets/screenshots/journal.jpg) | ![Pengaturan](assets/screenshots/settings.jpg) |
+| ![Jurnal](assets/screenshots/journal.jpg) | ![Detail Jurnal](assets/screenshots/journal-detail.jpg) |
+
+| Pengaturan | Pengaturan Audio |
+| --- | --- |
+| ![Pengaturan](assets/screenshots/settings.jpg) | ![Pengaturan Audio](assets/screenshots/settings-audio.jpg) |
+
+| Panduan Fase |
+| --- |
+| ![Panduan Fase](assets/screenshots/phase-guide.jpg) |
 
 ## Teknologi
 

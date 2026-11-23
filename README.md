@@ -61,9 +61,17 @@ Try it in your browser: **https://cyclela.vercel.app/**
 | --- | --- |
 | ![Overview](assets/screenshots/home.jpg) | ![Calendar](assets/screenshots/calendar.jpg) |
 
-| Daily Journal | Settings |
+| Daily Journal | Journal Details |
 | --- | --- |
-| ![Journal](assets/screenshots/journal.jpg) | ![Settings](assets/screenshots/settings.jpg) |
+| ![Journal](assets/screenshots/journal.jpg) | ![Journal Details](assets/screenshots/journal-detail.jpg) |
+
+| Settings | Audio Settings |
+| --- | --- |
+| ![Settings](assets/screenshots/settings.jpg) | ![Audio Settings](assets/screenshots/settings-audio.jpg) |
+
+| Phase Guide |
+| --- |
+| ![Phase Guide](assets/screenshots/phase-guide.jpg) |
 
 ## Tech Stack
 
