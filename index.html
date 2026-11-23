@@ -1,0 +1,500 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#fff8f4" />
+    <meta name="description" content="Cyclela, ruang pribadi untuk mengenali dan mencatat siklus tubuhmu." />
+    <link rel="manifest" href="./manifest.json" />
+    <link rel="icon" href="./cyclela-icon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="./cyclela-180.png" />
+    <title>Cyclela</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        color: #453b48;
+        background: #fffaf7;
+      }
+      * { box-sizing: border-box; }
+      body { margin: 0; min-width: 320px; min-height: 100vh; background: #fffaf7; }
+      button, input, textarea { font: inherit; }
+      button { cursor: pointer; }
+      .page-shell { width: min(100% - 32px, 960px); margin-inline: auto; padding: 28px 0 112px; }
+      .view-panel { display: grid; gap: 18px; }
+      .view-panel[hidden] { display: none; }
+      .topbar, .brand, .section-heading, .dashboard-top, .calendar-heading, .calendar-week, .calendar-grid, .form-row, .phase-list, .button-row { display: flex; }
+      .topbar, .dashboard-top, .section-heading, .calendar-heading { align-items: center; justify-content: space-between; gap: 16px; }
+      .brand { align-items: center; gap: 11px; }
+      .brand-mark { display: grid; flex: 0 0 44px; place-items: center; width: 44px; height: 44px; border-radius: 16px; color: #fff; background: #d783a6; box-shadow: 0 7px 18px #d783a633; }
+      .brand h1 { margin: 0; font-size: 1.45rem; line-height: 1.1; letter-spacing: -.04em; color: #594759; }
+      .brand p, .eyebrow, .muted { color: #8c7d8a; }
+      .brand p { margin: 4px 0 0; font-size: .76rem; }
+      .offline-pill { display: inline-flex; align-items: center; gap: 7px; padding: 8px 11px; border-radius: 999px; background: #f2ebf6; color: #766281; font-size: .75rem; font-weight: 650; }
+      .offline-dot { width: 7px; height: 7px; border-radius: 50%; background: #8d70a2; }
+      .affirmation { margin: 24px 0 20px; padding: 17px 20px; border: 1px solid #f3e8e8; border-radius: 20px; background: linear-gradient(105deg, #fff0f1, #f4eef9 72%, #fff9ed); color: #725b70; font-size: .96rem; }
+      .affirmation span { color: #c06e91; font-weight: 750; }
+      .affirmation-trigger { display: block; width: 100%; border: 0; text-align: left; cursor: pointer; }
+      .affirmation-trigger:focus-visible { outline: 2px solid #b87594; outline-offset: 3px; }
+      .card { padding: 22px; border: 1px solid #f0e9e8; border-radius: 24px; background: #fff; box-shadow: 0 12px 32px #5a44540a; }
+      .dashboard { overflow: hidden; position: relative; }
+      .dashboard:after { content: ""; position: absolute; width: 210px; height: 210px; right: -75px; top: -115px; border-radius: 50%; background: #fff0f4; pointer-events: none; }
+      .eyebrow { margin: 0 0 6px; text-transform: uppercase; letter-spacing: .1em; font-size: .68rem; font-weight: 750; }
+      .dashboard h2, .section-heading h2 { margin: 0; color: #534454; font-size: 1.15rem; letter-spacing: -.025em; }
+      .phase-badge { position: relative; z-index: 1; padding: 8px 12px; border-radius: 999px; background: #f8e8ee; color: #aa5f7e; font-size: .78rem; font-weight: 700; white-space: nowrap; }
+      .dashboard-main { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0 22px; }
+      .cycle-number { display: flex; align-items: baseline; gap: 7px; }
+      .cycle-number strong { color: #bd6e90; font-size: 3.5rem; line-height: 1; letter-spacing: -.07em; }
+      .cycle-number span { color: #8c7d8a; font-size: .9rem; }
+      .estimate { padding: 14px 16px; border-radius: 18px; background: #fbf7fc; }
+      .estimate strong { display: block; margin-top: 5px; color: #5e5066; font-size: 1.02rem; }
+      .estimate p { margin: 0; font-size: .75rem; color: #928494; }
+      .phase-list { gap: 6px; }
+      .phase { height: 8px; border-radius: 99px; background: #f1ecee; }
+      .phase[aria-current="step"] { box-shadow: 0 0 0 2px #65556b; }
+      #phase-menstruasi { flex: 5; }
+      #phase-folikuler { flex: 7; }
+      #phase-ovulasi { flex: 4; }
+      #phase-luteal { flex: 12; }
+      .phase.menstruasi { background: #eaa3b7; }
+      .phase.folikuler { background: #f2d5a7; }
+      .phase.ovulasi { background: #c5b0df; }
+      .phase.luteal { background: #a9c8b8; }
+      .phase-legend { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; margin-top: 12px; color: #897c88; font-size: .7rem; }
+      .phase-info-button { min-height: 58px; padding: 9px 11px; border: 1px solid #eee7ec; border-radius: 15px; color: #66596a; background: #fff; text-align: left; transition: .15s ease; }
+      .phase-info-button:hover { border-color: #dca0b6; background: #fff8fa; }
+      .phase-info-button:focus-visible, .audio-toggle:focus-visible { outline: 2px solid #b87594; outline-offset: 2px; }
+      .phase-info-title { display: flex; align-items: center; gap: 7px; font-size: .75rem; font-weight: 750; }
+      .phase-info-link { display: block; margin: 4px 0 0 15px; color: #ae6685; font-size: .65rem; font-weight: 700; }
+      .phase-help { margin: 10px 0 0; color: #948592; font-size: .72rem; }
+      .legend-dot { flex: 0 0 8px; width: 8px; height: 8px; border-radius: 50%; }
+      .audio-card { display: grid; gap: 13px; }
+      .audio-card .section-heading { margin-bottom: 0; }
+      .audio-card .section-heading p { margin: 5px 0 0; font-size: .74rem; }
+      .audio-controls { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .audio-toggle { display: flex; align-items: center; justify-content: space-between; gap: 8px; min-height: 48px; padding: 10px 12px; border: 1px solid #eee7ec; border-radius: 14px; color: #695c6b; background: #fff; font-size: .74rem; text-align: left; }
+      .audio-toggle[aria-pressed="true"] { border-color: #e3b0c3; background: #fff4f7; color: #9e5272; }
+      .audio-toggle strong { font-size: .68rem; }
+      .volume-control { display: grid; gap: 8px; }
+      .settings-form { display: grid; gap: 12px; padding-top: 14px; border-top: 1px solid #f1eaee; }
+      .settings-form > .primary-button { width: 100%; }
+      .settings-actions { display: grid; gap: 9px; }
+      .settings-actions .primary-button { width: 100%; }
+      .settings-actions .secondary-button { min-height: 42px; }
+      .volume-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: #66596a; font-size: .78rem; font-weight: 700; }
+      .volume-heading output { min-width: 42px; color: #a25373; text-align: right; }
+      .volume-control input[type="range"] { accent-color: #cc7899; }
+      input[type="text"] { width: 100%; min-height: 42px; padding: 10px 12px; border: 1px solid #eee7ec; border-radius: 13px; color: #554958; background: #fff; outline: none; }
+      input[type="text"]:focus, .month-picker:focus-visible, .today-button:focus-visible { border-color: #d292aa; outline: 2px solid #f9e9ef; outline-offset: 1px; }
+      .audio-status { min-height: 1.2em; margin: 0; color: #8c7d8a; font-size: .72rem; }
+      .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; }
+      .section-heading { margin-bottom: 18px; }
+      .month-nav { display: flex; align-items: center; flex-wrap: wrap; gap: 7px; }
+      .calendar-heading { align-items: flex-start; flex-wrap: wrap; }
+      .calendar-heading > div:first-child { flex: 1 1 100%; }
+      .calendar-heading .month-nav { width: 100%; display: grid; grid-template-columns: 34px 34px minmax(0, 1fr) auto; align-items: center; gap: 6px; }
+      .month-picker { min-width: 0; width: 100%; height: 36px; padding: 6px 7px; border: 1px solid #f0e9ee; border-radius: 12px; color: #605363; background: #fff; font-size: .75rem; font-weight: 700; }
+      .icon-button { display: grid; place-items: center; width: 34px; height: 34px; border: 1px solid #f0e9ee; border-radius: 12px; color: #76647b; background: #fff; }
+      .today-button { min-height: 36px; padding: 6px 10px; border: 1px solid #f0e9ee; border-radius: 12px; color: #9e5272; background: #fff5f8; font-size: .72rem; font-weight: 700; }
+      .today-button { white-space: nowrap; }
+      .settings-group { padding: 15px; border: 1px solid #f0e9ee; border-radius: 17px; background: #fffdfd; }
+      .settings-group h3 { margin: 0 0 12px; color: #66596a; font-size: .88rem; }
+      .settings-group .settings-form { padding: 0; border: 0; }
+      .settings-group .settings-form + .settings-form { margin-top: 14px; padding-top: 14px; border-top: 1px solid #f1eaee; }
+      .audio-controls { gap: 8px; }
+      .audio-toggle { min-width: 0; padding-inline: 9px; }
+      .calendar-week, .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); text-align: center; }
+      .calendar-week { margin-bottom: 8px; color: #a0929d; font-size: .68rem; font-weight: 650; }
+      .calendar-grid { gap: 5px 2px; }
+      .day { display: grid; place-items: center; width: 34px; height: 34px; margin-inline: auto; padding: 0; border: 0; border-radius: 50%; color: #625765; background: transparent; font-size: .76rem; transition: .15s ease; }
+      .day:hover { background: #f8f1f5; }
+      .day:focus-visible { outline: 2px solid #b87594; outline-offset: 2px; }
+      .day.outside { color: #c9c0c7; }
+      .day.predicted-period:not(.period-recorded) { background: #f7dce5; color: #a74e73; }
+      .day.predicted-period:not(.period-recorded) { box-shadow: inset 0 0 0 1px #e9b9ca; }
+      .day.ovulation-day:not(.period-recorded) { background: #eee5f8; color: #745a91; box-shadow: inset 0 0 0 1px #d5c4e7; }
+      .day.period-recorded { background: #d783a6; color: #fff; font-weight: 750; }
+      .day.period-recorded:hover { background: #c66f94; }
+      .day.today { outline: 2px solid #ce80a0; outline-offset: 2px; font-weight: 800; }
+      .calendar-instruction { margin: 9px 0 0; color: #8d818b; font-size: .72rem; }
+      .calendar-key { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 12px; color: #8d818b; font-size: .7rem; }
+      .calendar-key span { display: inline-flex; align-items: center; gap: 6px; }
+      .key-dot { width: 9px; height: 9px; border-radius: 50%; background: #f1cbd9; }
+      .key-dot.recorded { background: #d783a6; }
+      .key-dot.ovulation { background: #d9c9ec; }
+      .key-dot.forecast { border: 1px solid #e6b9ca; background: #f7dce5; }
+      .field-label { display: block; margin: 0 0 9px; color: #66596a; font-size: .82rem; font-weight: 700; }
+      .journal-guide { margin: 0 0 18px; padding: 14px 15px; border: 1px solid #f2e5eb; border-radius: 16px; background: linear-gradient(110deg, #fff6f8, #fbf7fc); }
+      .journal-guide h3 { margin: 0 0 9px; color: #684f65; font-size: .84rem; }
+      .journal-guide ol { display: grid; gap: 7px; margin: 0; padding: 0; list-style: none; }
+      .journal-guide li { display: flex; align-items: flex-start; gap: 8px; color: #766978; font-size: .75rem; line-height: 1.45; }
+      .journal-guide li span { display: grid; place-items: center; flex: 0 0 19px; width: 19px; height: 19px; border-radius: 50%; color: #a25373; background: #f8e4eb; font-size: .66rem; font-weight: 750; }
+      .journal-date-status { margin: 8px 0 0; color: #8c7d8a; font-size: .72rem; }
+      .journal-date-status[data-saved="true"] { color: #68816f; }
+      #log-title { font-size: 1rem; }
+      .journal-section { margin-top: 20px; padding-top: 17px; border-top: 1px solid #f1eaee; }
+      .journal-section-heading { margin: 0 0 4px; color: #66596a; font-size: .88rem; font-weight: 750; }
+      .journal-section-help { margin: 0 0 12px; color: #938692; font-size: .72rem; line-height: 1.45; }
+      .mood-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 7px; }
+      .mood-choice { min-height: 66px; padding: 8px 3px; border: 1px solid #efe9ed; border-radius: 15px; background: #fff; color: #817581; font-size: .67rem; transition: .15s ease; }
+      .mood-choice .emoji { display: block; margin-bottom: 4px; font-size: 1.25rem; }
+      .mood-choice[aria-pressed="true"] { border-color: #df9bb4; background: #fff2f6; color: #a25373; box-shadow: 0 0 0 2px #f9e1e9; }
+      .form-group { margin-top: 18px; }
+      .form-row { align-items: center; gap: 12px; }
+      input[type="range"] { width: 100%; accent-color: #cc7899; }
+      .range-value { display: grid; place-items: center; flex: 0 0 34px; height: 34px; border-radius: 12px; background: #fff0f4; color: #a25373; font-weight: 750; }
+      .symptoms { display: flex; flex-wrap: wrap; gap: 8px; }
+      .symptom-option { position: relative; }
+      .symptom-option input { position: absolute; opacity: 0; }
+      .symptom-option span { display: inline-flex; padding: 8px 11px; border: 1px solid #eee8ed; border-radius: 999px; color: #817581; font-size: .74rem; }
+      .symptom-option input:checked + span { border-color: #dca0b6; background: #fff1f5; color: #a25373; }
+      .symptom-option input:focus-visible + span { outline: 2px solid #b87594; outline-offset: 2px; }
+      textarea, input[type="date"] { width: 100%; border: 1px solid #eee7ec; border-radius: 13px; padding: 11px 12px; color: #554958; background: #fff; outline: none; }
+      input[type="password"] { width: 100%; min-height: 42px; border: 1px solid #eee7ec; border-radius: 13px; padding: 10px 12px; color: #554958; background: #fff; outline: none; }
+      textarea { min-height: 86px; padding: 14px 16px; resize: vertical; }
+      #personal-note { padding: 14px 16px; }
+      textarea:focus, input[type="date"]:focus, input[type="password"]:focus { border-color: #d292aa; box-shadow: 0 0 0 3px #f9e9ef; }
+      .button-row { gap: 9px; margin-top: 18px; }
+      .primary-button, .secondary-button { min-height: 42px; padding: 10px 14px; border: 0; border-radius: 13px; font-size: .8rem; font-weight: 750; }
+      #log-form .button-row > button { flex: 1 1 0; min-width: 0; padding-inline: 7px; font-size: .72rem; white-space: nowrap; }
+      .primary-button { flex: 1; background: #c97999; color: #fff; box-shadow: 0 7px 16px #c979992b; }
+      .primary-button:hover { background: #b96687; }
+      .secondary-button { border: 1px solid #eee7ec; background: #fff; color: #786b79; }
+      .privacy-note { margin: 13px 0 0; color: #9b9099; font-size: .7rem; line-height: 1.5; }
+      .bottom-nav { position: fixed; z-index: 10; inset: auto 0 0; display: grid; grid-template-columns: repeat(4, 1fr); padding: 8px max(16px, calc((100vw - 520px) / 2)) max(8px, env(safe-area-inset-bottom)); border-top: 1px solid #efe7eb; background: #fffdfc; box-shadow: 0 -8px 24px #5144540d; }
+      .bottom-nav[hidden] { display: none; }
+      .nav-tab { display: grid; justify-items: center; gap: 3px; min-height: 50px; padding: 5px 4px; border: 0; border-radius: 15px; color: #948592; background: transparent; font-size: .62rem; font-weight: 650; }
+      .nav-tab svg { width: 21px; height: 21px; stroke: currentColor; }
+      .nav-tab[aria-current="page"] { color: #b85f85; background: #fff0f4; }
+      .phase-dialog { width: min(420px, calc(100% - 32px)); padding: 24px; border: 1px solid #f0e3e9; border-radius: 24px; color: #554958; background: #fffafc; box-shadow: 0 22px 80px #44344740; }
+      .phase-dialog::backdrop { background: #42354680; backdrop-filter: blur(3px); }
+      .phase-dialog h2 { margin: 0 0 9px; color: #654c63; font-size: 1.15rem; }
+      .phase-dialog p { margin: 0; color: #6d606f; line-height: 1.6; }
+      .phase-dialog .primary-button { width: 100%; margin-top: 20px; }
+      #affection-dialog { overflow: visible; }
+      .flower-rain { position: fixed; z-index: 1; inset: 0; overflow: hidden; pointer-events: none; }
+      .flower-petal { position: absolute; top: -12vh; left: var(--flower-left); font-size: var(--flower-size); line-height: 1; opacity: 0; animation: flower-fall var(--flower-duration) linear var(--flower-delay) forwards; }
+      #affection-dialog > :not(.flower-rain) { position: relative; z-index: 2; }
+      @keyframes flower-fall {
+        0% { opacity: 0; transform: translate3d(0, -4vh, 0) rotate(0deg) scale(.7); }
+        10% { opacity: .95; }
+        100% { opacity: 0; transform: translate3d(var(--flower-drift), 115vh, 0) rotate(var(--flower-rotation)) scale(1.1); }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .flower-petal { animation-duration: .01ms; }
+      }
+      .toast { position: fixed; inset: auto 16px max(18px, env(safe-area-inset-bottom)) 16px; z-index: 5; width: fit-content; max-width: calc(100% - 32px); margin-inline: auto; padding: 11px 16px; border-radius: 14px; background: #514454; color: #fff; font-size: .82rem; box-shadow: 0 8px 24px #453b4840; }
+      .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; border: 0; }
+      @media (max-width: 640px) {
+        .page-shell { width: min(100% - 24px, 460px); padding-top: 18px; }
+        .affirmation { margin: 19px 0 14px; padding: 14px 16px; font-size: .87rem; }
+        .card { padding: 18px; border-radius: 21px; }
+        .content-grid { grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
+        .dashboard-main { margin: 20px 0 18px; }
+        .phase-info-button { padding: 9px; }
+        .phase-info-title { font-size: .72rem; }
+        .day { width: 36px; height: 36px; }
+        .calendar-grid { row-gap: 7px; }
+      }
+      @media (max-width: 360px) {
+        .offline-pill { padding: 7px 9px; font-size: .68rem; }
+        .dashboard-main { grid-template-columns: 1fr; }
+        .phase-legend { grid-template-columns: repeat(2, 1fr); row-gap: 8px; }
+      }
+      @media (min-width: 361px) and (max-width: 430px) {
+        .calendar-heading { gap: 10px; }
+        .calendar-heading h2 { font-size: 1.05rem; }
+        .calendar-heading .month-nav { gap: 5px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="topbar">
+        <div class="brand">
+          <div class="brand-mark" aria-hidden="true">
+            <svg width="25" height="25" viewBox="0 0 24 24" fill="none"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.7 12.2h2l1-2.3 1.5 4.2 1-1.9h1.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <h1>Cyclela</h1>
+            <p>Cycle Angela</p>
+          </div>
+        </div>
+        <div class="offline-pill"><span class="offline-dot"></span>Punya<span id="profile-name-badge">BAU</span></div>
+      </header>
+
+      <button class="affirmation affirmation-trigger" id="daily-affirmation" type="button" aria-haspopup="dialog" aria-controls="affection-dialog"><span>Hai, <span id="profile-name-affirmation"></span></span> 🌷</button>
+      <section class="view-panel" id="home-view" aria-labelledby="dashboard-title">
+      <section class="card dashboard" aria-labelledby="dashboard-title">
+        <div class="dashboard-top">
+          <div>
+            <p class="eyebrow" id="today-label">Hari ini</p>
+            <h2 id="dashboard-title">Perjalanan Siklusmu</h2>
+          </div>
+          <span class="phase-badge" id="phase-badge">Fase Folikuler</span>
+        </div>
+        <div class="dashboard-main">
+          <div>
+            <p class="eyebrow">Hari siklus</p>
+            <div class="cycle-number"><strong id="cycle-day">—</strong><span>dari <span id="cycle-length">—</span> hari</span></div>
+          </div>
+          <div class="estimate">
+            <p>Perkiraan haid berikutnya</p>
+            <strong id="next-period">—</strong>
+            <p id="days-until">Berdasarkan siklus rata-rata 28 hari</p>
+          </div>
+        </div>
+        <div class="phase-list" aria-label="Indikator fase siklus">
+          <span class="phase menstruasi" id="phase-menstruasi"></span>
+          <span class="phase folikuler" id="phase-folikuler"></span>
+          <span class="phase ovulasi" id="phase-ovulasi"></span>
+          <span class="phase luteal" id="phase-luteal"></span>
+        </div>
+        <div class="phase-legend" aria-label="Pilih fase untuk membaca penjelasan">
+          <button class="phase-info-button" type="button" data-phase-info="menstruasi">
+            <span class="phase-info-title"><i class="legend-dot" style="background:#eaa3b7"></i>Menstruasi</span>
+            <span class="phase-info-link">Lihat penjelasan</span>
+          </button>
+          <button class="phase-info-button" type="button" data-phase-info="folikuler">
+            <span class="phase-info-title"><i class="legend-dot" style="background:#f2d5a7"></i>Folikuler</span>
+            <span class="phase-info-link">Lihat penjelasan</span>
+          </button>
+          <button class="phase-info-button" type="button" data-phase-info="ovulasi">
+            <span class="phase-info-title"><i class="legend-dot" style="background:#c5b0df"></i>Ovulasi</span>
+            <span class="phase-info-link">Lihat penjelasan</span>
+          </button>
+          <button class="phase-info-button" type="button" data-phase-info="luteal">
+            <span class="phase-info-title"><i class="legend-dot" style="background:#a9c8b8"></i>Luteal</span>
+            <span class="phase-info-link">Lihat penjelasan</span>
+          </button>
+        </div>
+        <p class="phase-help">Fase mengikuti catatan kalender BAU. Pilih salah satu tombol di atas untuk membaca penjelasannya.</p>
+      </section>
+      </section>
+
+      <section class="view-panel" id="calendar-view" aria-labelledby="calendar-title" hidden>
+        <section class="card" aria-labelledby="calendar-title">
+          <div class="calendar-heading section-heading">
+            <div>
+              <p class="eyebrow">Lihat polamu</p>
+              <h2 id="calendar-title">Kalender Siklus</h2>
+            </div>
+            <div class="month-nav">
+              <button class="icon-button" id="previous-month" type="button" aria-label="Bulan sebelumnya">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m12 4-6 6 6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <button class="icon-button" id="next-month" type="button" aria-label="Bulan berikutnya">
+                <svg width="16" height="16" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="m8 4 6 6-6 6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <input class="month-picker" id="month-picker" type="month" aria-label="Pilih bulan dan tahun" />
+              <button class="today-button" id="current-month" type="button">Bulan ini</button>
+            </div>
+          </div>
+          <div class="calendar-week" aria-hidden="true">
+            <span>Min</span><span>Sen</span><span>Sel</span><span>Rab</span><span>Kam</span><span>Jum</span><span>Sab</span>
+          </div>
+          <div class="calendar-grid" id="calendar-grid" aria-label="Kalender bulanan"></div>
+          <p class="calendar-instruction">Ketuk tanggal untuk menandai atau membatalkan hari haid.</p>
+          <div class="calendar-key">
+            <span><i class="key-dot recorded"></i>Haid dicatat</span>
+            <span><i class="key-dot forecast"></i>Perkiraan haid</span>
+            <span><i class="key-dot ovulation"></i>Perkiraan ovulasi</span>
+          </div>
+        </section>
+      </section>
+
+      <section class="view-panel" id="journal-view" aria-labelledby="log-title" hidden>
+        <section class="card" aria-labelledby="log-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Jurnal harian</p>
+              <h2 id="log-title">Catatan Harianmu</h2>
+            </div>
+          </div>
+          <aside class="journal-guide" aria-label="Cara mengisi jurnal">
+            <h3>Isi jurnal dengan mudah</h3>
+            <ol>
+              <li><span>1</span>Pilih tanggal yang ingin dicatat. Hari ini sudah dipilih otomatis.</li>
+              <li><span>2</span>Pilih semua mood dan gejala yang kamu rasakan. Tingkat kram dan catatan pribadi boleh dilewati.</li>
+              <li><span>3</span>Klik <b>Simpan Catatan</b>untuk menyimpan catatan.</li>
+            </ol>
+          </aside>
+          <form id="log-form">
+            <section class="journal-section" aria-labelledby="log-date-label">
+              <label for="log-date" class="journal-section-heading field-label" id="log-date-label">1. Tanggal Jurnal</label>
+              <input id="log-date" type="date" required />
+              <p class="journal-date-status" id="journal-date-status" role="status" aria-live="polite"></p>
+            </section>
+
+            <section class="journal-section" aria-labelledby="mood-label">
+              <h3 class="journal-section-heading" id="mood-label">2. Mood Hari Ini</h3>
+              <p class="journal-section-help">Pilih semua mood yang kamu rasakan; kamu bisa memilih lebih dari satu. Bagian ini boleh dilewati.</p>
+              <div class="mood-options" role="group" aria-labelledby="mood-label">
+                <button class="mood-choice" type="button" data-mood="bahagia" aria-pressed="false"><span class="emoji">😊</span>Bahagia</button>
+                <button class="mood-choice" type="button" data-mood="tenang" aria-pressed="false"><span class="emoji">😌</span>Tenang</button>
+                <button class="mood-choice" type="button" data-mood="berenergi" aria-pressed="false"><span class="emoji">⚡</span>Berenergi</button>
+                <button class="mood-choice" type="button" data-mood="percaya diri" aria-pressed="false"><span class="emoji">💪</span>Percaya diri</button>
+                <button class="mood-choice" type="button" data-mood="bersyukur" aria-pressed="false"><span class="emoji">🥰</span>Bersyukur</button>
+                <button class="mood-choice" type="button" data-mood="netral" aria-pressed="false"><span class="emoji">😐</span>Netral</button>
+                <button class="mood-choice" type="button" data-mood="lelah" aria-pressed="false"><span class="emoji">😴</span>Lelah</button>
+                <button class="mood-choice" type="button" data-mood="sensitif" aria-pressed="false"><span class="emoji">🥺</span>Sensitif</button>
+                <button class="mood-choice" type="button" data-mood="cemas" aria-pressed="false"><span class="emoji">😟</span>Cemas</button>
+                <button class="mood-choice" type="button" data-mood="sedih" aria-pressed="false"><span class="emoji">😢</span>Sedih</button>
+                <button class="mood-choice" type="button" data-mood="mudah marah" aria-pressed="false"><span class="emoji">😠</span>Mudah marah</button>
+                <button class="mood-choice" type="button" data-mood="stres" aria-pressed="false"><span class="emoji">😣</span>Stres</button>
+                <button class="mood-choice" type="button" data-mood="kewalahan" aria-pressed="false"><span class="emoji">🫠</span>Kewalahan</button>
+                <button class="mood-choice" type="button" data-mood="fokus" aria-pressed="false"><span class="emoji">🧠</span>Fokus</button>
+                <button class="mood-choice" type="button" data-mood="romantis" aria-pressed="false"><span class="emoji">🥰</span>Penuh kasih</button>
+                <button class="mood-choice" type="button" data-mood="ngantuk" aria-pressed="false"><span class="emoji">😪</span>Ngantuk</button>
+              </div>
+            </section>
+
+            <section class="journal-section" aria-labelledby="body-notes-title">
+              <h3 class="journal-section-heading" id="body-notes-title">3. Kondisi Tubuh</h3>
+              <p class="journal-section-help">Pilih gejala yang dirasakan; kamu bisa memilih lebih dari satu. Jika tidak ada, lewati bagian ini.</p>
+              <label for="cramp-level" class="field-label">Tingkat kram (1 ringan – 5 berat)</label>
+              <div class="form-row">
+                <span class="muted" aria-hidden="true">Ringan</span>
+                <input id="cramp-level" type="range" min="1" max="5" value="1" />
+                <span class="muted" aria-hidden="true">Berat</span>
+                <output class="range-value" id="cramp-value" for="cramp-level">1</output>
+              </div>
+
+            <fieldset class="form-group" style="padding:0;border:0">
+              <legend class="field-label">Gejala</legend>
+              <div class="symptoms">
+                <label class="symptom-option"><input type="checkbox" value="kembung" /><span>Kembung</span></label>
+                <label class="symptom-option"><input type="checkbox" value="sakit kepala" /><span>Sakit kepala</span></label>
+                <label class="symptom-option"><input type="checkbox" value="jerawat" /><span>Jerawat</span></label>
+                <label class="symptom-option"><input type="checkbox" value="nyeri payudara" /><span>Nyeri payudara</span></label>
+                <label class="symptom-option"><input type="checkbox" value="lelah" /><span>Lelah</span></label>
+                <label class="symptom-option"><input type="checkbox" value="ngidam" /><span>Ngidam</span></label>
+                <label class="symptom-option"><input type="checkbox" value="kram perut" /><span>Kram perut</span></label>
+                <label class="symptom-option"><input type="checkbox" value="nyeri punggung" /><span>Nyeri punggung</span></label>
+                <label class="symptom-option"><input type="checkbox" value="mual" /><span>Mual</span></label>
+                <label class="symptom-option"><input type="checkbox" value="pusing" /><span>Pusing</span></label>
+                <label class="symptom-option"><input type="checkbox" value="diare" /><span>Diare</span></label>
+                <label class="symptom-option"><input type="checkbox" value="sembelit" /><span>Sembelit</span></label>
+                <label class="symptom-option"><input type="checkbox" value="sulit tidur" /><span>Sulit tidur</span></label>
+                <label class="symptom-option"><input type="checkbox" value="nyeri otot" /><span>Nyeri otot</span></label>
+                <label class="symptom-option"><input type="checkbox" value="perubahan nafsu makan" /><span>Nafsu makan berubah</span></label>
+                <label class="symptom-option"><input type="checkbox" value="perubahan suasana hati" /><span>Suasana hati berubah</span></label>
+                <label class="symptom-option"><input type="checkbox" value="flek" /><span>Flek</span></label>
+                <label class="symptom-option"><input type="checkbox" value="nyeri sendi" /><span>Nyeri sendi</span></label>
+              </div>
+            </fieldset>
+            </section>
+
+            <section class="journal-section" aria-labelledby="personal-note-title">
+              <h3 class="journal-section-heading" id="personal-note-title">4. Cerita Pribadi</h3>
+              <p class="journal-section-help">Bagian ini opsional. Tulis hal yang ingin kamu ingat untuk tanggal tersebut.</p>
+              <label for="personal-note" class="field-label">Catatan Pribadi</label>
+              <textarea id="personal-note" maxlength="1000" placeholder="Tulis apa pun yang ingin kamu ingat…"></textarea>
+            </section>
+            <div class="button-row">
+              <button class="primary-button" type="submit">Simpan Catatan</button>
+              <button class="secondary-button" id="clear-log" type="button">Batalkan Perubahan</button>
+            </div>
+          </form>
+        </section>
+      </section>
+
+      <section class="view-panel" id="settings-view" aria-labelledby="settings-title" hidden>
+        <section class="card audio-card" aria-labelledby="settings-title">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Sesuaikan pengalamanmu</p>
+              <h2 id="settings-title">Pengaturan Cyclela</h2>
+              <p class="muted">Atur tampilan nama, siklus, dan suara sesuai kebutuhan.</p>
+            </div>
+          </div>
+          <section class="settings-group" aria-labelledby="profile-settings-title">
+          <h3 id="profile-settings-title">Profil dan Siklus</h3>
+          <form id="profile-settings-form" class="settings-form">
+            <label class="volume-control" for="profile-name">
+              <span class="volume-heading">Nama Panggilan</span>
+              <input id="profile-name" type="text" maxlength="24" autocomplete="nickname" placeholder="Contoh: BAU" />
+            </label>
+            <button class="primary-button" type="submit">Simpan Nama</button>
+          </form>
+          <form id="cycle-settings-form" class="settings-form">
+            <label class="volume-control" for="cycle-length-setting">
+              <span class="volume-heading">Panjang Siklus <output id="cycle-length-setting-value" for="cycle-length-setting">28 hari</output></span>
+              <input id="cycle-length-setting" type="range" min="15" max="60" step="1" value="28" />
+            </label>
+            <p class="privacy-note">Pilih panjang siklus rata-ratamu (15–60 hari). Angka ini akan menjadi acuan dashboard, fase, dan prediksi. Tekan “Gunakan pola otomatis” untuk kembali mengikuti catatan kalender.</p>
+            <div class="settings-actions">
+              <button class="primary-button" type="submit">Simpan Panjang Siklus</button>
+              <button class="secondary-button" id="use-automatic-cycle" type="button">Gunakan Pola Otomatis</button>
+            </div>
+          </form>
+          </section>
+          <section class="settings-group" aria-labelledby="audio-settings-title">
+          <h3 id="audio-settings-title">Audio</h3>
+          <div class="audio-controls">
+            <button class="audio-toggle" id="sound-effects-toggle" type="button" data-audio-control="effects" aria-pressed="true">
+              <span>Efek Suara</span><strong id="sound-effects-state">Aktif</strong>
+            </button>
+            <button class="audio-toggle" id="background-music-toggle" type="button" data-audio-control="music" aria-pressed="true">
+              <span>Musik Latar</span><strong id="background-music-state">Aktif</strong>
+            </button>
+          </div>
+          <label class="volume-control" for="effects-volume">
+            <span class="volume-heading">Volume Efek Suara <output id="effects-volume-value" for="effects-volume">100%</output></span>
+            <input id="effects-volume" type="range" min="0" max="100" step="1" value="100" />
+          </label>
+          <label class="volume-control" for="music-volume">
+            <span class="volume-heading">Volume Musik Latar <output id="music-volume-value" for="music-volume">100%</output></span>
+            <input id="music-volume" type="range" min="0" max="100" step="1" value="100" />
+          </label>
+          <p class="audio-status" id="audio-status" role="status" aria-live="polite">Suara aktif saat halaman dibuka.</p>
+          <p class="privacy-note">Musik dibuat langsung di perangkat. Jika browser memblokir putar otomatis, sentuh layar sekali untuk memulainya.</p>
+          </section>
+        </section>
+      </section>
+
+    </main>
+    <nav class="bottom-nav" id="bottom-nav" aria-label="Navigasi utama">
+      <button class="nav-tab" type="button" data-view="home" aria-current="page">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-6v-7h-4v7H4a1 1 0 0 1-1-1z"/></svg>
+        <span>Ringkasan</span>
+      </button>
+      <button class="nav-tab" type="button" data-view="calendar" aria-current="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg>
+        <span>Kalender</span>
+      </button>
+      <button class="nav-tab" type="button" data-view="journal" aria-current="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.35-7-10a4 4 0 0 1 7-2.65A4 4 0 0 1 19 10c0 5.65-7 10-7 10Z"/><path d="M8.7 12.2h2l1-2.3 1.5 4.2 1-1.9h1.2"/></svg>
+        <span>Jurnal</span>
+      </button>
+      <button class="nav-tab" type="button" data-view="settings" aria-current="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/><path d="m19.4 15 .1.1 1.4 1.1-1.4 2.4-1.7-.7a8 8 0 0 1-1.4.8l-.3 1.8h-2.8l-.3-1.8a8 8 0 0 1-1.4-.8l-1.7.7-1.4-2.4 1.4-1.1a7 7 0 0 1 0-1.6l-1.4-1.1 1.4-2.4 1.7.7a8 8 0 0 1 1.4-.8l.3-1.8h2.8l.3 1.8a8 8 0 0 1 1.4.8l1.7-.7 1.4 2.4-1.4 1.1a7 7 0 0 1 0 1.6Z" transform="translate(-1 -1)"/></svg>
+        <span>Pengaturan</span>
+      </button>
+    </nav>
+    <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+    <dialog id="phase-dialog" class="phase-dialog" aria-labelledby="phase-dialog-title">
+      <h2 id="phase-dialog-title"></h2>
+      <p id="phase-dialog-description"></p>
+      <button id="close-phase-dialog" class="primary-button" type="button">Mengerti</button>
+    </dialog>
+    <dialog id="affection-dialog" class="phase-dialog" aria-labelledby="affection-dialog-title">
+      <div class="flower-rain" id="flower-rain" aria-hidden="true"></div>
+      <h2 id="affection-dialog-title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
+      <p>Cayang Anak Bau 🐷 Hehehe</p>
+      <button id="close-affection-dialog" class="primary-button" type="button">OK</button>
+    </dialog>
+    <dialog id="sleepy-dialog" class="phase-dialog" aria-labelledby="sleepy-dialog-title">
+      <h2 id="sleepy-dialog-title">💌 PESAN UNTUK ANAK BAU ❤️</h2>
+      <p>KAMUKAN MEMANG SELALU NGANTUK, ITUMAH BUKAN GEJALA, DASAR ANAK BAU 🐷</p>
+      <button id="close-sleepy-dialog" class="primary-button" type="button">OK</button>
+    </dialog>
+    <dialog id="action-dialog" class="phase-dialog" aria-labelledby="action-dialog-title" aria-describedby="action-dialog-message">
+      <h2 id="action-dialog-title">✅ Berhasil</h2>
+      <p id="action-dialog-message"></p>
+      <button id="close-action-dialog" class="primary-button" type="button">OK</button>
+    </dialog>
+    <script src="./app.js" defer></script>
+  </body>
+</html>

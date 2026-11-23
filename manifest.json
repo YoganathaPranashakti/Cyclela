@@ -1,0 +1,32 @@
+{
+  "name": "Cyclela",
+  "short_name": "Cyclela",
+  "description": "Ruang pribadi untuk mengenali dan mencatat siklus tubuhmu.",
+  "id": "./",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "theme_color": "#fff8f4",
+  "background_color": "#fffaf7",
+  "icons": [
+    {
+      "src": "./cyclela-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./cyclela-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "./cyclela-icon.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}
